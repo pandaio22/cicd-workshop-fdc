@@ -34,4 +34,13 @@ jobs:
 
           - name: Flutter Test
             run: flutter test
+
+          # Configure Docker authentication for interacting with Artifact Registry, allowing you to push or pull Docker images securely.
+          # Build the docker image and push top artifact registry.
+          - name: Build and Push Docker Image 🐳
+            run: |
+              gcloud auth configure-docker --quiet
+              gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
+              docker build -t europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1 .
+              docker push europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1
           
