@@ -24,7 +24,7 @@ jobs:
 
           # Set the default GCP project for subsequent gcloud commands in your environment. 
           - name: Configure GCP Project
-            run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+            run: gcloud config set project ${{ vars.GCP_PROJECT_ID }}
 
           - name: Flutter Web Build
             run: flutter build web
@@ -35,11 +35,11 @@ jobs:
             run: |
               gcloud auth configure-docker --quiet
               gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
-              docker build -t europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1 .
-              docker push europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1
+              docker build -t europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1 .
+              docker push europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1
           
           - name:
-            run: gcloud run deploy cicd-12 --image europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1 --region us-central
+            run: gcloud run deploy cicd-12 --image europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1 --region us-central
 
           - name: This will be your CD ⚙️
             run: echo "This will be your CD ⚙️"
