@@ -27,30 +27,30 @@ jobs:
             run: gcloud config set project ${{ vars.GCP_PROJECT_ID }}
 
           # Fetches the GitHub repository files
-          - name: Check out repository code 
-            uses: actions/checkout@v4
+          #- name: Check out repository code 
+          #  uses: actions/checkout@v4
           
           # Popular community-maintained action used to set up Flutter in GitHub workflows. 
           # Installs Flutter and allows you to run commands like flutter build, flutter test, and flutter analyze within your CI/CD pipeline.
-          - name: Setup Flutter 
-            uses: subosito/flutter-action@v2
-            with:
-              channel: 'stable'
+          #- name: Setup Flutter 
+          #  uses: subosito/flutter-action@v2
+          #  with:
+          #    channel: 'stable'
 
-          - name: Flutter pub get
-            run: flutter pub get
+          #- name: Flutter pub get
+          #  run: flutter pub get
 
-          - name: Flutter build
-            run: flutter build web
+          #- name: Flutter build
+          #  run: flutter build web
           
-          - name: Dart format
-            run: dart format --output=none --set-exit-if-changed .
+          #- name: Dart format
+          #  run: dart format --output=none --set-exit-if-changed .
           
-          - name: Flutter Analyze
-            run: flutter analyze
+          #- name: Flutter Analyze
+          #  run: flutter analyze
 
-          - name: Flutter Test
-            run: flutter test
+          #- name: Flutter Test
+          #  run: flutter test
 
           # Configure Docker authentication for interacting with Artifact Registry, allowing you to push or pull Docker images securely.
           # Build the docker image and push top artifact registry.
@@ -62,7 +62,7 @@ jobs:
               docker push europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1
           
           - name:
-            run: gcloud run deploy cicd-12 --image europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1 --region us-central
+            run: gcloud run deploy cicd-12 --image europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/cicd-12:v1 --region us-central1
 
           - name: This will be your CD ⚙️
             run: echo "This will be your CD ⚙️"

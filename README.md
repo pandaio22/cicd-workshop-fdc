@@ -35,7 +35,7 @@ Now that all the necessary information is correctly added to the secret environm
 
 For step 3 here is the docker tag you should use:
 ```
-europe-west3-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_ARTIFACT_REGISTRY }}/{FLUTTER_APP_NAME}:v$VERSION
+europe-west3-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REGISTRY }}/{FLUTTER_APP_NAME}:v$VERSION
 ```
 For step 4 this is how you should deploy your app to cloud run:
 ```
